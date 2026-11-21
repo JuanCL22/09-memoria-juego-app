@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "09 · Juego de Memoria",
+    "slug": "09-memoria-juego-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "memoriajuego",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tdea.memoriajuego09",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Se utiliza para mostrar el ranking de mejores puntajes en tu ciudad cuando activas el filtro por ciudad."
+      }
+    },
+    "android": {
+      "package": "com.tdea.memoriajuego09",
+      "permissions": [
+        "android.permission.VIBRATE",
+        "android.permission.ACCESS_COARSE_LOCATION"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      "expo-secure-store",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Se utiliza únicamente cuando activas el ranking por ciudad para identificar tu ciudad actual."
+        }
+      ]
+    ]
+  }
+}

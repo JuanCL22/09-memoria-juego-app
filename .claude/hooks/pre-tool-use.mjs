@@ -33,7 +33,8 @@ export function evaluarAccion(payload, directorioRaiz = process.cwd()) {
     if (rutaObjetivo.startsWith("~")) {
       return {
         permitido: false,
-        motivo: "Bloqueado por hook PreToolUse: acceso a directorio personal (~) prohibido."
+        motivo:
+          "Bloqueado por hook PreToolUse: acceso a directorio personal (~) prohibido."
       };
     }
 
@@ -44,7 +45,8 @@ export function evaluarAccion(payload, directorioRaiz = process.cwd()) {
     if (relativa.startsWith("..") || path.isAbsolute(relativa)) {
       return {
         permitido: false,
-        motivo: "Bloqueado por hook PreToolUse: no se permite salir de la carpeta del repositorio."
+        motivo:
+          "Bloqueado por hook PreToolUse: no se permite salir de la carpeta del repositorio."
       };
     }
 
@@ -63,7 +65,8 @@ export function evaluarAccion(payload, directorioRaiz = process.cwd()) {
     if (/(^|\s)(\.\.([\\/]|$)|~[\\/])/i.test(comando)) {
       return {
         permitido: false,
-        motivo: "Bloqueado por hook PreToolUse: comando intenta acceder fuera del repositorio."
+        motivo:
+          "Bloqueado por hook PreToolUse: comando intenta acceder fuera del repositorio."
       };
     }
 

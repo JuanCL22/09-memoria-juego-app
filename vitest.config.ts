@@ -13,7 +13,14 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       reporter: ["text", "json-summary"],
-      include: ["src/services/**/*.ts", "src/repositories/**/*.ts", "src/api/**/*.ts", "src/sensors/logica-sensores.ts"],
+      include: [
+        "src/services/juego.service.ts",
+        "src/services/ranking.service.ts",
+        "src/services/sincronizacion.service.ts",
+        "src/repositories/**/*.ts",
+        "src/api/**/*.ts",
+        "src/sensors/logica-sensores.ts"
+      ],
       thresholds: {
         lines: 80,
         functions: 80,
