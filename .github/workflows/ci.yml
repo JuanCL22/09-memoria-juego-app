@@ -1,0 +1,40 @@
+name: CI · Calidad y Seguridad (App Móvil)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  calidad:
+    name: Check, Hook Tests y Auditoría
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: Instalar dependencias limpias
+        run: npm ci
+
+      - name: Ejecutar pruebas del Hook PreToolUse de IA
+        run: npm run test:hook
+
+      - name: Verificar calidad (typecheck + lint + format:check + vitest coverage)
+        run: npm run check
+
+      - name: Verificar ausencia de firebaseConfig o claves privadas en el repositorio
+        run: |
+          if grep -rn "firebaseConfig\|FIREBASE_PRIVATE_KEY\|FIREBASE_WEB_API_KEY" app/ src/; then
+            echo "Error: secreto o firebaseConfig detectado en la app móvil"
+            exit 1
+          fi
+
+      - name: Auditoría de vulnerabilidades en dependencias
+        run: npm audit --audit-level=high

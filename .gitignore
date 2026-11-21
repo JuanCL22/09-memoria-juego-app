@@ -1,0 +1,26 @@
+# Dependencias y compilación
+node_modules/
+.expo/
+dist/
+web-build/
+coverage/
+
+# Secretos, variables de entorno y firmas (NUNCA versionar)
+.env
+.env.*
+*.pem
+*.key
+*firebase-adminsdk*.json
+*.keystore
+*.jks
+*.p12
+*.mobileprovision
+
+# Sistema y registros
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+expo-env.d.ts
+tsconfig.tsbuildinfo
