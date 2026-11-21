@@ -15,16 +15,20 @@ export function CartaTablero(props: CartaTableroProps): React.ReactElement {
   const { carta, indice, esCursorInclinacion, modoDificilArrastre, onVoltear } = props;
   const visible = carta.volteada || carta.encontrada;
 
-  const gestoTap = Gesture.Tap().onEnd(() => {
-    onVoltear(carta.id);
-  });
-
-  const gestoPan = Gesture.Pan().onEnd((evento) => {
-    const distancia = Math.hypot(evento.translationX, evento.translationY);
-    if (modoDificilArrastre && distancia > 18) {
+  const gestoTap = Gesture.Tap()
+    .runOnJS(true)
+    .onEnd(() => {
       onVoltear(carta.id);
-    }
-  });
+    });
+
+  const gestoPan = Gesture.Pan()
+    .runOnJS(true)
+    .onEnd((evento) => {
+      const distancia = Math.hypot(evento.translationX, evento.translationY);
+      if (modoDificilArrastre && distancia > 18) {
+        onVoltear(carta.id);
+      }
+    });
 
   const gestoCompuesto = Gesture.Exclusive(gestoPan, gestoTap);
 

@@ -86,13 +86,16 @@ function EncabezadoPartida(props: {
   );
 }
 
+function crearGestosTablero(onBarajar: () => void, onPausar: () => void) {
+  const fling = Gesture.Fling().runOnJS(true).direction(Directions.UP).onEnd(onBarajar);
+  const longPress = Gesture.LongPress().runOnJS(true).minDuration(600).onEnd(onPausar);
+  return Gesture.Simultaneous(fling, longPress);
+}
+
 export default function JuegoScreen(): React.ReactElement {
   const router = useRouter();
   const p = usePartidaMemoria();
-  const fling = Gesture.Fling().direction(Directions.UP).onEnd(p.barajarRestantes);
-  const longPress = Gesture.LongPress().minDuration(600).onEnd(p.alternarPausa);
-  const gestos = Gesture.Simultaneous(fling, longPress);
-
+  const gestos = crearGestosTablero(p.barajarRestantes, p.alternarPausa);
   const voltearCursor = () => {
     const objetivo = p.cartas[p.cursor];
     if (objetivo) p.manejarVolteo(objetivo.id);
